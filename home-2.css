@@ -3407,7 +3407,7 @@ blockquote {
 
 .section.about-us-banner {
   background-color: var(--primary-green);
-  background-image: linear-gradient(#0c2218cc, #0c2218cc), url("https://cdn.prod.website-files.com/678e158a1b1754646bc0cdb9/67a0c663c88d1b2dac490897_64135%201%20(1).webp");
+  background-image: linear-gradient(#0c2218cc, #0c2218cc), url("images2.png");
   background-position: 0 0, 50%;
   background-size: auto, auto;
   justify-content: center;
@@ -3431,7 +3431,7 @@ blockquote {
 
 .section.free-trial-section {
   background-color: var(--primary-green);
-  background-image: linear-gradient(34deg, var(--primary-green) 37%, var(--transparent)), url("https://cdn.prod.website-files.com/678e158a1b1754646bc0cdb9/67a0c663c88d1b2dac490897_64135%201%20(1).webp");
+  background-image: linear-gradient(34deg, var(--primary-green) 37%, var(--transparent)), url("images2.png");
   background-position: 0 0, 0 0;
   background-size: auto, auto;
 }
@@ -3447,7 +3447,7 @@ blockquote {
 
 .section.dark-green-background-with-img {
   background-color: var(--primary-green);
-  background-image: linear-gradient(63deg, var(--primary-green) 78%, #fff0), url("https://cdn.prod.website-files.com/678e158a1b1754646bc0cdb9/67a0c663c88d1b2dac490897_64135%201%20(1).webp");
+  background-image: linear-gradient(63deg, var(--primary-green) 78%, #fff0), url("images2.png");
   background-position: 0 0, 100% 0;
   background-repeat: repeat, no-repeat;
   background-size: auto, auto;
@@ -9063,7 +9063,7 @@ blockquote {
 .banner-bg-dark-green {
   z-index: -1;
   background-color: var(--primary-green);
-  background-image: linear-gradient(63deg, var(--primary-green) 78%, var(--transparent)), url("https://cdn.prod.website-files.com/678e158a1b1754646bc0cdb9/67a0c663c88d1b2dac490897_64135%201%20(1).webp");
+  background-image: linear-gradient(63deg, var(--primary-green) 78%, var(--transparent)), url("images2.png");
   background-position: 0 0, 100% 0;
   background-repeat: repeat, no-repeat;
   background-size: auto, auto;
@@ -10886,7 +10886,7 @@ blockquote {
   }
 
   .section.dark-green-background-with-img {
-    background-image: linear-gradient(60deg, var(--primary-green) 73%, #fff0), url("https://cdn.prod.website-files.com/678e158a1b1754646bc0cdb9/67a0c663c88d1b2dac490897_64135%201%20(1).webp");
+    background-image: linear-gradient(60deg, var(--primary-green) 73%, #fff0), url("images2.png");
     background-position: 0 0, 100% 0;
     background-repeat: repeat, no-repeat;
     background-size: auto, auto;
