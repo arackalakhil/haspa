@@ -469,7 +469,7 @@
 
                   <img
                     style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                    loading="lazy" alt="Main Image" src="pinejack.jpeg" class="image-cover">
+                    loading="lazy" alt="Main Image" src="pinejack.jpg" class="image-cover">
 
                 </a>
                 <div class="service-info-details">
@@ -742,9 +742,96 @@
       <div class="projects-hero-wrap" style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
 
         <!-- LEFT SIDE: Image -->
-        <div class="image-wrap" style="flex: 1; min-width: 300px;" data-w-id="image-animation" style="opacity: 0;">
-          <img src="PATH.jpg" alt="All Projects" style="width: 100%; height: auto; border-radius: 8px;">
-        </div>
+        <style>
+  .hw-box {
+    flex: 1;
+    min-width: 300px;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+
+  .hw-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    color: #222;
+  }
+
+  .hw-step {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .hw-step:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .hw-step-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #f87c7c;
+    margin-bottom: 8px;
+  }
+
+  .hw-step-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+  }
+
+  .hw-step-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #555;
+  }
+</style>
+
+<div class="image-wrap hw-box" data-w-id="image-animation" style="opacity: 1;">
+  <div class="hw-title">How We Work</div>
+
+  <div class="hw-step">
+    <div class="hw-step-number">01</div>
+    <div class="hw-step-title">Connect & Understand Your Needs</div>
+    <div class="hw-step-description">
+      We begin by building a clear understanding of your goals. Through personal consultations, we identify the products you need and tailor our approach to meet your market, budget, and quality expectations.
+    </div>
+  </div>
+
+  <div class="hw-step">
+    <div class="hw-step-number">02</div>
+    <div class="hw-step-title">Source & Assure Quality from India</div>
+    <div class="hw-step-description">
+      We ethically source from trusted producers across India. Each item is inspected and certified under APEDA and FSSAI standards for safety and consistency.
+    </div>
+  </div>
+
+  <div class="hw-step">
+    <div class="hw-step-number">03</div>
+    <div class="hw-step-title">Pack, Ship & Track Globally</div>
+    <div class="hw-step-description">
+      We handle packaging, documentation, and international logistics, ensuring smooth customs clearance and real-time shipment tracking.
+    </div>
+  </div>
+
+  <div class="hw-step">
+    <div class="hw-step-number">04</div>
+    <div class="hw-step-title">Deliver, Verify & Support</div>
+    <div class="hw-step-description">
+      Upon arrival, we perform a second quality check. We stay connected post-delivery for feedback, reorders, and lasting trade relationships.
+    </div>
+  </div>
+</div>
+
 
         <!-- RIGHT SIDE: Text Content -->
         <div class="projects-section-title-wrap" style="flex: 1; min-width: 300px;" data-w-id="text-animation"
@@ -916,8 +1003,7 @@
 
           <!-- Your form continues below unchanged -->
 
-          <!-- <div data-w-id="efed9b96-fff7-8b3d-06b5-f949ff07a30a" class="footer-form w-form" style="opacity: 0;">
-            <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-wrap"
+            <!-- <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-wrap"
               data-wf-page-id="678e158a1b1754646bc0ce83" data-wf-element-id="efed9b96-fff7-8b3d-06b5-f949ff07a30b"
               aria-label="Email Form"><input class="footer-form-input w-input" maxlength="256" name="email"
                 data-name="Email" placeholder="Enter your email" type="email" id="email" required="">
@@ -932,28 +1018,28 @@
                 </div><input type="submit" data-wait="Please wait..." class="primary-button dark w-button"
                   value="Subscribe">
               </div>
-            </form>
+            </form> -->
             <div class="form-success-message w-form-done" tabindex="-1" role="region" aria-label="Email Form success">
               <div>Thank you! Your submission has been received!</div>
             </div>
             <div class="form-error-message w-form-fail" tabindex="-1" role="region" aria-label="Email Form failure">
               <div>Oops! Something went wrong while submitting the form.</div>
             </div>
-          </div> -->
+          </div> 
         </div>
         <div class="w-layout-hflex footer-links"><a href="/about-us.html" class="link-with-line w-inline-block">
             <div data-w-id="3cc7a11e-8ccc-5d17-2961-8ea299b920b3" class="text-wrap" style="opacity: 0;">
               <div class="line tablet-hidden"
                 style="display: none; transform: translate3d(-100%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
               </div>
-              <p class="text-link">About us</p>
+              <p class="text-link">About us&nbsp;&nbsp;</p>
             </div>
             <!-- </a><a href="/pricing" class="link-with-line w-inline-block"> -->
             <div data-w-id="633f8c92-42bc-4d82-335d-916fbaf7a484" class="text-wrap" style="opacity: 0;">
               <div class="line tablet-hidden"
                 style="display: none; transform: translate3d(-100%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
               </div>
-              <p class="text-link">pricing</p>
+              <p class="text-link">&nbsp;&nbsp;pricing</p>
             </div>
           </a><a href="/services.html" class="link-with-line w-inline-block">
             <div data-w-id="58713774-079b-abe8-ec1a-50de9af5adfb" class="text-wrap" style="opacity: 0;">
