@@ -226,7 +226,7 @@
 
  <div class="container " style="margin-top: 98px;">
         <!-- Form Section -->
-        <!-- <div class="form-section">
+        <div class="form-section"> 
             <div class="form-wrapper">
                 <div class="form-header">
                     <h1 class="form-title">Let's Connect</h1>
@@ -256,6 +256,7 @@
                     <div class="form-group">
                         <label for="company" class="form-label">Company</label>
                         <input type="text" id="company" name="company" class="form-input">
+                         <div class="error-message"></div>
                     </div>
                     
                     <div class="form-group">
@@ -270,7 +271,7 @@
                 </form>
             </div>
         </div>
-         -->
+        
         <!-- Info Section -->
         <div class="info-section">
             <div class="floating-shape shape-1"></div>
@@ -980,219 +981,111 @@
         }
 </style>
 <script>
-    // Form validation and submission
-        const form = document.getElementById('contactForm');
-        const submitBtn = form.querySelector('.submit-btn');
-        const successMessage = document.getElementById('successMessage');
+const form = document.getElementById('contactForm');
+const submitBtn = form.querySelector('.submit-btn');
+const scriptURL = "https://script.google.com/macros/s/AKfycbyGhd5TQbFB3bulPZdRv9fZmE3LvNcunHZE81iJysQqyTwUyHMWDyR_yTJB4c5kRuau/exec"; // <-- replace with your new URL
 
-        // Validation rules
-        const validationRules = {
-            firstName: {
-                required: true,
-                minLength: 2,
-                pattern: /^[a-zA-Z\s]+$/,
-                message: 'Please enter a valid first name (letters only, at least 2 characters)'
-            },
-            lastName: {
-                required: true,
-                minLength: 2,
-                pattern: /^[a-zA-Z\s]+$/,
-                message: 'Please enter a valid last name (letters only, at least 2 characters)'
-            },
-            email: {
-                required: true,
-                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: 'Please enter a valid email address'
-            },
-            message: {
-                required: true,
-                minLength: 10,
-                message: 'Please enter a message with at least 10 characters'
-            }
-        };
+// ===== Validation rules =====
+const validationRules = {
+  firstName: { required: true, minLength: 2, pattern: /^[a-zA-Z\s]+$/, message: 'Enter a valid first name (letters only, min 2 chars)' },
+  lastName: { required: true, minLength: 2, pattern: /^[a-zA-Z\s]+$/, message: 'Enter a valid last name (letters only, min 2 chars)' },
+  email: { required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Enter a valid email address' },
+  message: { required: true, minLength: 10, message: 'Message must be at least 10 characters' }
+};
 
-        // Floating label functionality
-        function handleFloatingLabels() {
-            const inputs = document.querySelectorAll('.form-input, .form-textarea');
-            
-            inputs.forEach(input => {
-                const label = input.previousElementSibling;
-                
-                function updateLabel() {
-                    if (input.value.trim() !== '' || input === document.activeElement) {
-                        label.classList.add('floating');
-                        input.classList.add('has-content');
-                    } else {
-                        label.classList.remove('floating');
-                        input.classList.remove('has-content');
-                    }
-                }
-                
-                input.addEventListener('focus', updateLabel);
-                input.addEventListener('blur', updateLabel);
-                input.addEventListener('input', updateLabel);
-                
-                // Initialize on page load
-                updateLabel();
-            });
-        }
+// ===== Floating Labels =====
+function handleFloatingLabels() {
+  const inputs = document.querySelectorAll('.form-input, .form-textarea');
+  inputs.forEach(input => {
+    const label = input.previousElementSibling;
+    function updateLabel() {
+      if (input.value.trim() !== '' || input === document.activeElement) {
+        label.classList.add('floating');
+        input.classList.add('has-content');
+      } else {
+        label.classList.remove('floating');
+        input.classList.remove('has-content');
+      }
+    }
+    input.addEventListener('focus', updateLabel);
+    input.addEventListener('blur', updateLabel);
+    input.addEventListener('input', updateLabel);
+    updateLabel();
+  });
+}
+handleFloatingLabels();
 
-        // Initialize floating labels
-        handleFloatingLabels();
+// ===== Validation =====
+function validateField(name, value) {
+  const rule = validationRules[name];
+  if (!rule) return { isValid: true };
+  if (rule.required && !value.trim()) return { isValid: false, message: `${name} is required` };
+  if (rule.minLength && value.length < rule.minLength) return { isValid: false, message: rule.message };
+  if (rule.pattern && !rule.pattern.test(value)) return { isValid: false, message: rule.message };
+  return { isValid: true };
+}
 
-        // Enhanced field validation with visual feedback
-        function validateField(fieldName, value) {
-            const rules = validationRules[fieldName];
-            if (!rules) return { isValid: true };
+function showError(input, msg) {
+  input.classList.add('error');
+  const err = input.parentNode.querySelector('.error-message');
+  if (err) { err.textContent = msg; err.classList.add('show'); }
+}
 
-            if (rules.required && !value.trim()) {
-                return { isValid: false, message: `${fieldName} is required` };
-            }
+function clearError(input) {
+  input.classList.remove('error');
+  const err = input.parentNode.querySelector('.error-message');
+  if (err) { err.textContent = ''; err.classList.remove('show'); }
+}
 
-            if (value && rules.minLength && value.length < rules.minLength) {
-                return { isValid: false, message: rules.message };
-            }
+// ===== Realtime validation =====
+form.querySelectorAll('input, textarea').forEach(input => {
+  input.addEventListener('blur', () => {
+    const v = validateField(input.name, input.value);
+    v.isValid ? clearError(input) : showError(input, v.message);
+  });
+});
 
-            if (value && rules.pattern && !rules.pattern.test(value)) {
-                return { isValid: false, message: rules.message };
-            }
+// ===== Form submission =====
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-            return { isValid: true };
-        }
+  let valid = true;
+  const formData = new FormData(form);
 
-        // Show error message
-        function showError(input, message) {
-            input.classList.add('error');
-            input.classList.remove('valid');
-            const errorElement = input.parentNode.querySelector('.error-message');
-            errorElement.textContent = message;
-            errorElement.classList.add('show');
-        }
+  form.querySelectorAll('input, textarea').forEach(input => {
+    const v = validateField(input.name, input.value);
+    if (!v.isValid) {
+      showError(input, v.message);
+      valid = false;
+    } else {
+      clearError(input);
+    }
+  });
 
-        // Clear error message and show valid state
-        function clearError(input) {
-            input.classList.remove('error');
-            if (input.value.trim() !== '') {
-                input.classList.add('valid');
-            } else {
-                input.classList.remove('valid');
-            }
-            const errorElement = input.parentNode.querySelector('.error-message');
-            errorElement.classList.remove('show');
-            setTimeout(() => {
-                errorElement.textContent = '';
-            }, 300);
-        }
+  if (!valid) return;
 
-        // Real-time validation
-        form.querySelectorAll('input, textarea').forEach(input => {
-            input.addEventListener('blur', () => {
-                const validation = validateField(input.name, input.value);
-                if (!validation.isValid) {
-                    showError(input, validation.message);
-                } else {
-                    clearError(input);
-                }
-            });
+  submitBtn.classList.add('loading');
+  submitBtn.disabled = true;
 
-            input.addEventListener('input', () => {
-                if (input.classList.contains('error')) {
-                    const validation = validateField(input.name, input.value);
-                    if (validation.isValid) {
-                        clearError(input);
-                    }
-                }
-            });
-        });
+  try {
+    const response = await fetch(scriptURL, { method: 'POST', body: formData });
+    const result = await response.json();
 
-        // Form submission
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
-            
-            // Validate all fields
-            let isFormValid = true;
-            Object.keys(data).forEach(fieldName => {
-                const input = form.querySelector(`[name="${fieldName}"]`);
-                const validation = validateField(fieldName, data[fieldName]);
-                
-                if (!validation.isValid) {
-                    showError(input, validation.message);
-                    isFormValid = false;
-                } else {
-                    clearError(input);
-                }
-            });
-
-            if (!isFormValid) {
-                return;
-            }
-
-            // Show loading state
-            submitBtn.classList.add('loading');
-            submitBtn.disabled = true;
-
-            try {
-                // Simulate API call
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
-                // Show success message
-                successMessage.classList.add('show');
-                setTimeout(() => {
-                    successMessage.classList.remove('show');
-                }, 5000);
-                
-                // Reset form
-                form.reset();
-                
-            } catch (error) {
-                console.error('Form submission error:', error);
-            } finally {
-                // Reset button state
-                submitBtn.classList.remove('loading');
-                submitBtn.disabled = false;
-            }
-        });
-
-        // Add subtle animations to form inputs
-        document.querySelectorAll('.form-input, .form-textarea').forEach(input => {
-            input.addEventListener('focus', () => {
-                input.style.transform = 'translateY(-2px)';
-            });
-            
-            input.addEventListener('blur', () => {
-                input.style.transform = 'translateY(0)';
-            });
-        });
-
-        // Floating shapes animation optimization
-        const shapes = document.querySelectorAll('.floating-shape');
-        let animationId;
-
-        function animateShapes() {
-            shapes.forEach((shape, index) => {
-                const time = Date.now() * 0.001 + index * 2;
-                const y = Math.sin(time * 0.5) * 20;
-                const rotation = time * 30;
-                shape.style.transform = `translateY(${y}px) rotate(${rotation}deg)`;
-            });
-            animationId = requestAnimationFrame(animateShapes);
-        }
-
-        // Start animation when in viewport
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !animationId) {
-                    animateShapes();
-                } else if (!entry.isIntersecting && animationId) {
-                    cancelAnimationFrame(animationId);
-                    animationId = null;
-                }
-            });
-        });
-
-        observer.observe(document.querySelector('.info-section'));
+    if (result.status === "success") {
+      alert(result.message);
+      form.reset();
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+  } catch (err) {
+    console.error("Error submitting form:", err);
+    alert("Failed to send. Please try again later.");
+  } finally {
+    submitBtn.classList.remove('loading');
+    submitBtn.disabled = false;
+  }
+});
 </script>
+
+
 </html>
